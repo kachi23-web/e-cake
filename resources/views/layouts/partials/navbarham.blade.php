@@ -7,7 +7,7 @@
     <div class="humberger__menu__cart">
         <ul>
             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+            <li><a href="{{ url('cart') }}"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
         </ul>
         <div class="header__cart__price">item: <span>$150.00</span></div>
     </div>
@@ -25,7 +25,7 @@
             @if (Route::has('login'))
            
                 @auth
-                    <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500">Home</a>
+                    <a href="{{ url('/') }}" class="text-sm text-gray-700 dark:text-gray-500">Home</a>
                  @else
                  <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500"><i class="fa fa-user"></i> Login</a>
           

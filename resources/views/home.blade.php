@@ -1,23 +1,74 @@
-@extends('layouts.app')
+@extends('layouts.frontend')
+
+@section('title')
+    E-Cake
+@endsection
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+    @include('layouts.inc.slider')
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+    <div class="py-5">
+        <div class="container">
+            <div class="row">
+                <h2>Featured Products</h2>
+                <div class="owl-carousel featured-carousel owl-theme">
+                    @foreach ($featured_products as $prod)
+                    <div class="item col-md-6">
+                        {{-- <div class="col-md-3 mt-3"> --}}
+                        <div class="card">
+                            <img src="{{ asset('assets/uploads/products/'.$prod->image) }}"  alt="products image">
+                            <div class="card-body">
+                                <h5>{{ $prod->name }}</h5>
+                                <span class="float-start">{{ $prod->selling_price }}</span>
+                                <span class="float-end"><s>{{ $prod->original_price }}</s></span>
+                            </div>
                         </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
+                    </div>
+                    @endforeach
                 </div>
+                
             </div>
         </div>
     </div>
-</div>
-@endsection
+    </div>
+    @endsection
+
+
+    @section('scripts')
+    <script>
+        var owl = $('.owl-carousel');
+        owl.owlCarousel({
+            items:4,
+            loop:true,
+            margin:10,
+            autoplay:true,
+            autoplayTimeout:1000,
+            autoplayHoverPause:true
+        });
+        $('.play').on('click',function(){
+            owl.trigger('play.owl.autoplay',[1000])
+        })
+        $('.stop').on('click',function(){
+            owl.trigger('stop.owl.autoplay')
+        })
+
+          /*   $('.featured-carousel').owlCarousel({
+              loop:true,
+              margin:10,
+              nav:true,
+              dot:false,
+              responsive:{
+                  0:{
+                      items:1
+                  },
+                  600:{
+                      items:3
+                  },
+                  1000:{
+                      items:3
+                  }
+              }
+            }) */
+    </script>
+    @endsection
+

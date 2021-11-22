@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>@yield('title')</title>
 
         <!-- Fonts -->
@@ -98,14 +98,16 @@
 
 
  <!-- Js Plugins -->
-  <script src="{{ asset('frontend/js/jquery-3.3.1.min.js') }}" ></script> 
+ 
+ <script src="{{ asset('frontend/js/jquery-3.3.1.min.js') }}" ></script> 
  <script src="{{ asset('frontend/js/bootstrap.min.js') }}" ></script>
  {{-- <script src="{{ asset('frontend/js/jquery.nice-select.min.js') }}" ></script> --}}
  <script src="{{ asset('frontend/js/jquery-ui.min.js') }}" ></script>
  <script src="{{ asset('frontend/js/jquery.slicknav.js') }}" ></script>
  <script src="{{ asset('frontend/js/mixitup.min.js') }}"></script>
  <script src="{{ asset('frontend/js/owl.carousel.min.js') }}"></script>
- <script src="{{ asset('frontend/js/main.js') }}"></script>
+ <script src="{{ asset('frontend/js/quantity.js') }}"></script>
+ <script src="{{ asset('frontend/js/main.js') }}"></script> 
  <script src="{{ asset('frontend/js/cart.js') }}"></script>
 
  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

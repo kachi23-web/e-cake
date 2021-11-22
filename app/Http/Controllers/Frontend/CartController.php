@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\frontend;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,7 @@ class CartController extends Controller
 
         if(Auth::check())
         {
-            $prod_check = Product::where('id',$product_id)->exists();
+            $prod_check = Product::where('id',$product_id)->first();
 
             if($prod_check)
             {
@@ -33,14 +34,65 @@ class CartController extends Controller
                     $cartItem->user_id = Auth::id();
                     $cartItem->prod_qty = $product_qty;
                     $cartItem->save();
-                    return response()->json(['status' =>$prod_check->name."Added to cart"]);
+                    return response()->json(['status' => $prod_check->name."Added to cart"]);
+                }
+                
+    
+            }
         }
-    }
         else
         {
-            return response()->json(['status'=>"Login to Continue"]);
+            return response()->json(['status' => "Login to Continue"]);
         }
 
+    
+    }   
+
+    public function viewcart()
+    {
+        $cartitems = Cart::where('user_id',Auth::id())->get();
+        return view('frontend.shop.cart', compact('cartitems'));
     }
-}}
+
+    public function updatecart(Request $request)
+ {
+     $prod_id = $request->input('prod_id');
+     $product_qty = $request->input('prod_qty');
+
+     if(Auth::check())
+     {
+        $prod_id = $request->input('prod_id');
+        if(Cart::where('prod_id',$prod_id)->where('user_id',Auth::id())->exists());
+        {
+            $cart = Cart::where('prod_id',$prod_id)->where('user_id',Auth::id())->first();
+            $cart->prod_qty = $product_qty;
+            $cart->update();
+            return response()->json(['status'=>'quantity updated']);
+        }
+     }
+
+ }
+
+   public function deleteProduct(Request $request)
+   {
+    if(Auth::check())
+    {
+        $prod_id = $request->input('prod_id');
+        if(Cart::where('prod_id',$prod_id)->where('user_id',Auth::id())->exists())
+        {
+            $cartItem = Cart::where('prod_id',$prod_id)->where('user_id',Auth::id())->first();
+            $cartItem->delete();
+            return response()->json(['status' => "Item deleted Successfully"]);
+
+        }
+    }
+    else
+    {
+        return response()->json(['status' => "Login to Continue"]);
+    }
+   }
+ 
+   
+}
+
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,11 +42,17 @@ Auth::routes();
 
 /* Route::middleware(['auth','isAdmin']) -> group(function () {
     Route::get('/dashboard', 'ADMIN\FrontendController@index');
-    }); */
-Route::middleware(['auth'])->group(function (){
-Route::post('add-to-cart',[CartController::class,'addProduct']);
+    });   */
+    Route::post('add-to-cart',[CartController::class,'addProduct']);
+    Route::post('update-cart',[CartController::class,'updatecart']);
+    Route::post('delete-cart-item',[CartController::class,'deleteProduct']);
+
+   Route::middleware(['auth'])->group(function (){
+    Route::get('cart',[CartController::class,'viewcart']);
+    Route::get('checkout',[CheckoutController::class,'index']);
+
 });
-Route::middleware(['auth','isAdmin']) -> group(function () {
+  Route::middleware(['auth','isAdmin']) -> group(function () {
     Route::get('/dashboard', 'ADMIN\FrontendController@index');
         //return view('admin.dashboard');
         //return view('admin.index');

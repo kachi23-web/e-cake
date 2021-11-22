@@ -147,16 +147,16 @@
                             </select>
 
                             <select class="form-select" name="size_id">
-                            <option value="">Select the size</option>
+                            <option value="">Select size</option>
                             </select>
 
                             <div class="col-md-12 mb-3">
                             <label for="">Cake message</label>
-                        <textarea  row="3" name="cake_message" class="form-control"></textarea>
+                        <textarea  row="3" name="cake_message" placeholder= "type your cake message here" class="form-control"></textarea>
                             </div>
                         <div class="col-md-12 mb-3">
                             <label for="">Order Details</label>
-                            <textarea row="3 " name="order_details" class="form-control"></textarea>
+                            <textarea row="3 " name="order_details" placeholder= "describe exactly what you want here" class="form-control"></textarea>
                         </div>
                         <div class="col-md-12 mb-3">
                             <input type="file" name="image" class="form-control">
@@ -375,118 +375,5 @@
 
 
 
-
-@endsection
-@section('scripts')
-
-<script>
-    $('.addToCartBtn').click(function (e) { 
-          e.preventDefault();
-          
-          var product_id = $(this).closest('.product_data').find('.prod_id').val();
-          var product_qty = $(this).closest('.product_data').find('.qty-input').val();
-
-        //   alert(product_id);
-        // alert(product_qty);
-
-          $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        
-         $.ajax({
-             method:"POST",
-             url: "/add-to-cart",
-             data: { 
-                 'product_id':product_id,
-                 'product_qty':product_qty, 
-                 
-                 },
-                 {{--/*      
-            success: function (data) {
-            console.log(data);
-
-            },
-            error: function (data) {
-            console.log('Error:', data);
-            } */--}} 
-           success: function (response) {
-                 
-                 swal(response.status);
-             } 
-         });
-      }); 
-
-
-
-
-    
-    var proQty = $('.pro-qty');
-    proQty.prepend('<span class="dec qtybtn">-</span>');
-    proQty.append('<span class="inc qtybtn">+</span>');
-    proQty.on('click', '.qtybtn', function () {
-
-
-        var $button = $(this);
-        var oldValue = $button.parent().find('input').val();
-        if ($button.hasClass('inc')) {
-            var newVal = parseFloat(oldValue) + 1;
-        } else {
-            // Don't allow decrementing below zero
-            if (oldValue > 0) {
-                var newVal = parseFloat(oldValue) - 1;
-            } else {
-                newVal = 0;
-            }
-        }
-        $button.parent().find('input').val(newVal);
-    });
-
-    
-
-  (jQuery) 
-</script>
-
-{{-- <script>
-    $(document).ready(function (){
-
-        $('.addToCartBtn').click(function (e) { 
-          e.preventDefault();
-          
-          var product_id = $(this).closest('.product_data').find('.prod_id').val();
-          var product_qty = $(this).closest('.product_data').find('.qty-input').val();
-
-          alert('product_id');
-          alert('product_qty');
-
-
-     $('.increment-btn').click(function (e) { 
-         e.preventDefault();
-         
-         var inc_value = $('.qty-input').val();
-         var value = parseInt(inc_value,10);
-         value = isNaN(value)? 0 : value;
-         if(value < 10)
-         {
-             value++;
-             $('.qty-input').val( value);
-         }
-     });
-     $('.decrement-btn').click(function (e) { 
-         e.preventDefault();
-         
-         var dec_value = $('.qty-input').val();
-         var value = parseInt(dec_value,10);
-         value = isNaN(value)? 0 : value;
-         if(value > 1)
-         {
-             value--;
-             $('.qty-input').val(value);
-         }
-     });
-    });
-</script> --}}
 
 @endsection

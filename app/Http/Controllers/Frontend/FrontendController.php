@@ -16,7 +16,7 @@ class FrontendController extends Controller
         
         $featured_products = Product::where('trending','1')->take(15)->get();
         $trending_category = Category::where('popular','1')->take(15)->get();
-        return view('frontend.index', compact('featured_products','trending_category'));
+        return view('index', compact('featured_products','trending_category'));
     }
 
     public function category()
@@ -24,7 +24,7 @@ class FrontendController extends Controller
 
 
         $category = Category::where('status','1')->get();
-        return view('frontend.category',compact('category'));
+        return view('frontend.products.category',compact('category'));
         // return view('frontend.category');
 
     }
@@ -49,7 +49,7 @@ class FrontendController extends Controller
             {
                 $products = Product::where('slug',$prod_slug)->first();
                 $featured_products = Product::where('trending','1')->take(15)->get();
-                return view('frontend.products.view',compact('products','featured_products'));
+                return view('frontend.shop.shop-details',compact('products','featured_products'));
             }
             else{
                 return redirect('/')->with('status',"broken link");

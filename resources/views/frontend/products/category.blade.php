@@ -4,9 +4,7 @@
      Welcome to E-cake
 @endsection
 
-        {{-- @section('content')
-
-        @endsection --}}
+        
 <!-- Page Preloder -->
 @section('content')
 <!-- Hero Section Begin -->

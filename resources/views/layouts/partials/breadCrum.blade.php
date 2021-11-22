@@ -6,8 +6,9 @@
                     <h2>Product Details</h2>
                     <div class="breadcrumb__option">
                         <a href="./">Home</a>
+                        {{-- <a href="{{ url('category/'.$products->category->slug) }}"></a> --}}
                         <a href="{{ url('category') }}">shop</a>
-                        <span>Product Details</span>
+                        <span>{{ $products->name }}</span>
                     </div>
                 </div>
             </div>

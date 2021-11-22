@@ -30,11 +30,24 @@
                             @if (Route::has('login'))
                                 {{-- <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block"> --}}
                                     @auth
-                                        <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500">Home</a>
-                                     @else
+                                        {{-- <a href="{{ url('/') }}" class="text-sm text-gray-700 dark:text-gray-500">Home</a> --}}
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                                {{ __('Logout') }}
+                                        </a>
+          
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                            @else
                                      <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500"><i class="fa fa-user"></i> Login</a>
                             {{-- <a href="login.html"> --}}
                         </div> &nbsp
+                        {{--<div class="dropdown-divider"></div>
+                         <a class="dropdown-item" href="#">Log out</a> --}}
+                        
+                    
 
                         <div class="header__top__right__auth">
                             @if (Route::has('register'))
@@ -60,7 +73,7 @@
             <div class="col-lg-6">
                 <nav class="header__menu">
                     <ul>
-                        <li><a href="./">Home</a></li>
+                        <li><a href="/">Home</a></li>
                         <li class="active"><a href="{{ url('category') }}">Shop</a></li>
                        
                         <li><a href="./blog.html">About</a></li>
@@ -72,7 +85,7 @@
                 <div class="header__cart">
                     <ul>
                         <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                        <li><a href="#"><i class="fa fa-shopping-cart"></i> <span>3</span></a></li>
+                        <li><a href="{{ url('cart') }}"><i class="fa fa-shopping-cart"></i> <span>3</span></a></li>
                     </ul>
                     <div class="header__cart__price">item: <span>$150.00</span></div>
                 </div>
