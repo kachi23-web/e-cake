@@ -145,7 +145,8 @@
             </div>
         </div>
     </div>
-    <!-- Banner End -->
+    <!-- Banner End
+    mysql://bee32c86a63b10:d375021a@us-cdbr-east-04.cleardb.com/heroku_2513b95f9cf5f95?reconnect=true -->
 
 
         @endsection
